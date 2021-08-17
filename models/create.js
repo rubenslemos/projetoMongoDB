@@ -1,6 +1,7 @@
-const db = require('./db')
+const db = require('mongoose')
+const Schema = db.Schema
     //Definindo as models
-const ClienteSchema = db.mongoose.Schema({
+const ClienteSchema = new Schema({
     nome: { type: String, require: true },
     email: { type: String, require: true },
     cpf: { type: Number, require },
@@ -12,7 +13,7 @@ const ClienteSchema = db.mongoose.Schema({
     estado: { type: String },
     cep: { type: Number }
 })
-const OrcamentoSchema = db.mongoose.Schema({
+const OrcamentoSchema = new Schema({
         peca: { type: String, require: true },
         compras: { type: Number, require: true },
         quantidade: { type: Number, require: true },
@@ -22,9 +23,9 @@ const OrcamentoSchema = db.mongoose.Schema({
         servicos: { type: String, require: true }
     })
     // Definindo as collections
-db.mongoose.model('clientes', ClienteSchema)
-db.mongoose.model('orcamentos', OrcamentoSchema)
+Schema('clientes', ClienteSchema)
+Schema('orcamentos', OrcamentoSchema)
 module.exports = ({
-    ClienteSchema: db.mongoose.model('clientes', ClienteSchema),
-    OrcamentoSchema: db.mongoose.model('orcamentos', OrcamentoSchema)
+    ClienteSchema: Schema('clientes', ClienteSchema),
+    OrcamentoSchema: Schema('orcamentos', OrcamentoSchema)
 })

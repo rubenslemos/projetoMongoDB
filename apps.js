@@ -2,8 +2,10 @@
 const express = require('express')
 const handlebars = require('express-handlebars')
 const bodyparser = require("body-parser")
-const mongoose = require('mongoose')
+const mongoose = require('./models/db')
 const app = express()
+const admin = require('./routes/admin')
+const path = require('path')
     //Configurações
     //Body Parser
 app.use(express.urlencoded({ extended: true }))
@@ -11,11 +13,11 @@ app.use(express.json())
     //Handlebars
 app.engine('handlebars', handlebars({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
-    //Mongoose
-    //Em breve
+    //Public
+app.use(express.static(path.join(__dirname, "public")))
     //Rotas
-
-//Outros
+app.use('/admin', admin)
+    //Outros
 const PORT = 8081
 app.listen(PORT, () => {
     console.log("Servidor Rodando")
