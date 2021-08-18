@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const inserir = require('../models/inserir')
 router.get('/', (req, res) => {
     res.render('admin/index')
 })
@@ -12,5 +13,7 @@ router.get('/categorias', (req, res) => {
 router.get('/categorias/add', (req, res) => {
     res.render('admin/addcategorias')
 })
+
+router.post('/categorias/nova', inserir.Categorias)
 
 module.exports = router

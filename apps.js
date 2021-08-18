@@ -7,7 +7,6 @@ const app = express()
 const admin = require('./routes/admin')
 const path = require('path')
     //Configurações
-    //Body Parser
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
     //Handlebars

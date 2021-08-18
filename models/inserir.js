@@ -1,6 +1,19 @@
-const create = require('./create')
+const criar = require("./categoria")
+const Categoria = criar.categoriaSchema
+const Categorias = (req, res) => {
+    new Categoria({
+        nome: req.body.nome,
+        slug: req.body.slug
+    }).save().then(() => {
+        console.log("Salvo com sucesso")
+    })
+}
+module.exports = {
+    Categorias: Categorias
+}
+
+/*
 const cliente = create.ClienteSchema
-const item = create.OrcamentoSchema
 new cliente({
         nome: "Rubens",
         email: "rubenslemos@gmail.com",
@@ -14,13 +27,8 @@ new cliente({
         cep: 30310050
     }).save().then(() => { console.log("Cliente Salvo com Sucesso") })
     .catch((err) => { console.log("Erro encontrado ao salvar cliente: " + err) }),
-    new item({
-        peca: "Placa Mãe",
-        compras: 500,
-        quantidade: 1,
-        lucro: 30,
-        venda: 650,
-        maodeobra: 150,
-        servicos: "Instalação"
-    }).save().then(() => { console.log("Item Salvo com Sucesso") })
-    .catch((err) => { console.log("Erro encontrado ao salvar item: " + err) })
+
+    module.exports = {
+        cliente: cliente
+    }
+*/

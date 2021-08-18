@@ -1,13 +1,22 @@
-const db = require('mongoose')
+const mongoose = require('./db')
     //Definindo as models
-const Schema = db.Schema
-const Categoria = new Schema({
-        nome: { type: String, require: true },
-        slug: { type: String, require: true },
-        date: { type: Date, default: Date.now(), require: true }
+const categoriaSchema = new mongoose.mongoose.Schema({
+        nome: {
+            type: String,
+            require: true
+        },
+        slug: {
+            type: String,
+            require: true
+        },
+        date: {
+            type: Date,
+            default: Date.now(),
+            require: true
+        }
     })
     // Definindo a collection
-Schema('categorias', Categoria)
+mongoose.mongoose.model('categorias', categoriaSchema)
 module.exports = ({
-    Categoria: Schema('categorias', Categoria),
+    categoriaSchema: mongoose.mongoose.model('categorias', categoriaSchema)
 })
