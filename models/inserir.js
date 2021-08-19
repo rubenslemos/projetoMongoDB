@@ -1,34 +1,34 @@
 const criar = require("./categoria")
 const Categoria = criar.categoriaSchema
 const Categorias = (req, res) => {
-    new Categoria({
-        nome: req.body.nome,
-        slug: req.body.slug
-    }).save().then(() => {
-        console.log("Salvo com sucesso")
-    })
+    var erros = []
+    if (!req.body.nome || typeof req.body.nome == undefined || req.body.nome == null) {
+        erros.push({ texto: "Nome Invalido" })
+    }
+    if (!req.body.slug || typeof req.body.slug == undefined || req.body.slug == null) {
+        erros.push({ texto: "Slug Invalido" })
+    }
+    if (req.body.nome.length < 3) {
+        erros.push({ texto: "Nome muito curto, favor digitar outro Nome" })
+    }
+    if (req.body.slug.length < 3) {
+        erros.push({ texto: "Slug muito curto, favor digitar outro Slug" })
+    }
+    if (erros.length > 0) {
+        res.render("../views/admin/addcategorias", { erros: erros })
+    } else {
+        new Categoria({
+            nome: req.body.nome,
+            slug: req.body.slug
+        }).save().then(() => {
+            req.flash("success_msg", "Categoria criada com sucesso!")
+            res.redirect('../categorias')
+        }).catch((err) => {
+            req.flash("error_msg", "Algo saiu errado, tente novamente!")
+            res.redirect('../categorias')
+        })
+    }
 }
 module.exports = {
     Categorias: Categorias
 }
-
-/*
-const cliente = create.ClienteSchema
-new cliente({
-        nome: "Rubens",
-        email: "rubenslemos@gmail.com",
-        cpf: 06788715625,
-        telefone: 31984562229,
-        nascimento: 1982 - 10 - 06,
-        sexo: "Masculino",
-        endereco: "Rua Antero da Silveira 88 apto 202",
-        cidade: "Belo Horizonte",
-        estado: "Minas Gerais",
-        cep: 30310050
-    }).save().then(() => { console.log("Cliente Salvo com Sucesso") })
-    .catch((err) => { console.log("Erro encontrado ao salvar cliente: " + err) }),
-
-    module.exports = {
-        cliente: cliente
-    }
-*/

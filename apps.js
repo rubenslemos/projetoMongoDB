@@ -2,21 +2,57 @@
 const express = require('express')
 const handlebars = require('express-handlebars')
 const bodyparser = require("body-parser")
+const session = require('express-session')
+const flash = require('connect-flash')
 const mongoose = require('./models/db')
 const app = express()
 const admin = require('./routes/admin')
 const path = require('path')
+    //Session
+app.use(session({
+    secret: "cursodenode",
+    resave: true,
+    saveUninitialized: true
+}))
+app.use(flash())
+app.use((req, res, next) => {
+        res.locals.success_msg = req.flash("success_msg")
+        res.locals.error_msg = req.flash("erro_msg")
+        next()
+    })
     //Configurações
+
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
-    //Handlebars
+
+//Handlebars
+
 app.engine('handlebars', handlebars({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
-    //Public
+
+//Public
+
 app.use(express.static(path.join(__dirname, "public")))
-    //Rotas
+
+//Middleware - será usado para o sistema de autenticação mais pra frente no curso
+
+// app.use((req, res, next) => {
+//     console.log("Eu sou um Middleware")
+//     next()
+// })
+
+//Rotas
+
+app.get('/', (req, res) => {
+    res.send('Rota principal')
+})
+app.get('/posts', (req, res) => {
+    res.send('Lista Posts')
+})
 app.use('/admin', admin)
-    //Outros
+
+//Outros
+
 const PORT = 8081
 app.listen(PORT, () => {
     console.log("Servidor Rodando")
