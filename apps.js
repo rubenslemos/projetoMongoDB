@@ -8,6 +8,7 @@ const mongoose = require('./models/db')
 const app = express()
 const admin = require('./routes/admin')
 const path = require('path')
+const moment = require("moment")
     //Session
 app.use(session({
     secret: "cursodenode",
@@ -27,7 +28,18 @@ app.use(express.json())
 
 //Handlebars
 
-app.engine('handlebars', handlebars({ defaultLayout: 'main' }))
+app.engine('handlebars', handlebars({
+    defaultLayout: 'main',
+    runtimeOptions: {
+        allowProtoPropertiesByDefault: true,
+        allowProtoMethodsByDefault: true,
+    },
+    helpers: {
+        formatDate: (date) => {
+            return moment(date).format('DD/MM/YYYY HH:mm')
+        }
+    }
+}))
 app.set('view engine', 'handlebars')
 
 //Public

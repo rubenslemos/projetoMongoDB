@@ -6,12 +6,13 @@
 <h3 class="mt-4">Nova Categoria</h3>
 <div class="card mt-4">
     <div class="card-body">
-        <form action="/admin/categorias/nova" method="post">
+        <form action="/admin/categorias/nova" method="post" id="criar" name="criar">
             <label for="nome">Nome: </label>
                 <input type="text" id="nome" name="nome" placeholder="Nome da Categoria" class="form-control mt-2">
             <label for="slug" class="mt-2">Slug:</label>
                 <input type="text" id="slug" name="slug" placeholder="Slug da Categoria" class="form-control mt-2">
-            <button type="submit" class="btn btn-success mt-4">Criar Categoria</button>
         </form>
+            <button type="submit" class="btn btn-success mt-4" form="criar">Criar Categoria</button>
+            <a href="/admin/categorias"><button class="btn btn-danger mt-4">Cancelar</button></a>
     </div>
 </div>
