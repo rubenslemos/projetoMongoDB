@@ -46,17 +46,8 @@ app.set('view engine', 'handlebars')
 
 app.use(express.static(path.join(__dirname, "public")))
 
-//Middleware - será usado para o sistema de autenticação mais pra frente no curso
-
-// app.use((req, res, next) => {
-//     console.log("Eu sou um Middleware")
-//     next()
-// })
-
-//Rotas
-
 app.get('/', (req, res) => {
-    res.send('Rota principal')
+    res.render('./admin/index')
 })
 app.get('/posts', (req, res) => {
     res.send('Lista Posts')
