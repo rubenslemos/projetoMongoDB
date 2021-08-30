@@ -128,7 +128,7 @@ const Usuarios = async(req, res) => {
                         }
 
                         usuario.senha = hash
-                        usuario.save()
+                            // usuario.save()
 
                     })
                 })
