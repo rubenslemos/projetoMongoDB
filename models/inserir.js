@@ -1,4 +1,4 @@
-const criar = require("./categoria")
+const criar = require('./categoria')
 const novoPost = require('./Postagem')
 const user = require('./Usuario')
 const bcryptjs = require('bcryptjs')
