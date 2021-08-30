@@ -32,5 +32,22 @@ module.exports = {
             req.flash("error_msg", "Houve um erro ao carregar o formulário")
             res.redirect('admin/postagens')
         })
-    }
+    },
+    async listaIndex(req, res) {
+        listaIndex = await listaPost.Postagem.find().populate("categoria")
+            .sort({ data: 'desc' }).then((postagens) => {
+                res.render('index', { postagens: postagens })
+            }).catch((err) => {
+                req.flash("error_msg", "Houve um erro ao exibir as categorias")
+                res.redirect('/404')
+            })
+    },
+    async listaCategoriaUser(req, res) {
+        listaCategoriaUser = await listar.categoriaSchema.find()
+            .sort({ date: 'desc' }).then((categorias) => {
+                res.render('categorias/index', { categorias: categorias })
+            }).catch((err) => {
+                req.flash("error_msg", "Houve um erro ao exibir as categorias")
+            })
+    },
 }

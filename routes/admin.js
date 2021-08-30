@@ -5,28 +5,21 @@ const listar = require('../models/categoria')
 const edit = require('../models/edit')
 const deletar = require('../models/deletar')
 const read = require('../models/read')
-router.get('/', (req, res) => {
-    res.render('admin/index')
-})
+const eAdmin = require('../helpers/eAdmin')
+router.get('/', (req, res) => { res.render('admin/index') })
 
-router.get('/categorias', read.listacategoria)
-router.get('/postagens', read.listaPostagem)
+router.get('/categorias/add', eAdmin.eAdmin, read.enviarCategorias)
+router.get('/categorias', eAdmin.eAdmin, read.listacategoria)
+router.get('/categorias/edit/:id', eAdmin.eAdmin, edit.exibir)
+router.post("/categorias/edit", eAdmin.eAdmin, edit.editar)
+router.post("/categorias/deletar", eAdmin.eAdmin, deletar.deletarCategoria)
+router.post('/categorias/nova', eAdmin.eAdmin, inserir.Categorias)
 
-router.get('/categorias/add', (req, res) => {
-    res.render('admin/addcategorias')
-})
-router.get('/postagens/add', read.enviarPostagens)
-
-router.get('/categorias/edit/:id', edit.exibir)
-router.post("/categorias/edit", edit.editar)
-router.get('/postagens/editPost/:id', edit.exibirPost)
-router.post('/postagens/editPost', edit.editarPost)
-
-router.post("/categorias/deletar", deletar.deletarCategoria)
-router.post('/postagens/deletar', deletar.deletarPostagem)
-
-router.post('/categorias/nova', inserir.Categorias)
-router.post('/postagens/nova', inserir.Postagens)
-
+router.get('/postagens', eAdmin.eAdmin, read.listaPostagem)
+router.get('/postagens/add', eAdmin.eAdmin, read.enviarPostagens)
+router.get('/postagens/editPost/:id', eAdmin.eAdmin, edit.exibirPost)
+router.post('/postagens/editPost', eAdmin.eAdmin, edit.editarPost)
+router.post('/postagens/deletar', eAdmin.eAdmin, deletar.deletarPostagem)
+router.post('/postagens/nova', eAdmin.eAdmin, inserir.Postagens)
 
 module.exports = router

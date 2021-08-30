@@ -1,0 +1,10 @@
+<a href="/"><button class="btn btn-danger btn-sm">Voltar</button></a>
+{{#each categorias}}
+<a href="/categorias/{{slug}}"><h4 class="mt-2">Categoria: {{nome}}</h4></a>
+            <h6>Slug: {{slug}}</h6>
+            <small>{{formatDate date}}</small><hr>
+{{else}}
+<h4 class="mt-4">Nenhuma categoria cadastrada</h4>
+{{/each}}
+
+               

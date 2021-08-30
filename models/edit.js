@@ -5,8 +5,8 @@ const postagens = listaPost.Postagem
 module.exports = {
     async exibir(req, res) {
         exibir = categorias.findOne({ _id: req.params.id })
-            .then((categorias) => {
-                res.render("admin/edit", { categorias: categorias })
+            .then((categoria) => {
+                res.render("admin/edit", { categoria: categoria })
             }).catch((err) => {
                 req.flash("error_msg", "Categoria não encontrada")
                 res.redirect("/admin/categorias")
@@ -17,13 +17,13 @@ module.exports = {
         if (!req.body.nome || typeof req.body.nome == undefined || req.body.nome == null) {
             erros.push({ texto: "Nome Invalido" })
         }
-        if (!req.body.slug || typeof req.body.slug == undefined || req.body.slug == null) {
-            erros.push({ texto: "Slug Invalido" })
+        if (!req.body.slug || typeof req.body.slug == undefined || req.body.slug == null || !req.body.slug.match(/^[0-9a-z]+$/)) {
+            erros.push({ texto: "Slug vazio ou contendo carácter não alfanumérico" })
         }
         if (req.body.nome.length < 3) {
             erros.push({ texto: "Nome muito curto, favor digitar outro Nome" })
         }
-        if (req.body.slug.length < 3) {
+        if (req.body.slug.length < 2) {
             erros.push({ texto: "Slug muito curto, favor digitar outro Slug" })
         }
         if (erros.length > 0) {
@@ -62,8 +62,8 @@ module.exports = {
         if (!req.body.titulo || typeof req.body.titulo == undefined || req.body.titulo == null) {
             erros.push({ texto: "Titulo Invalido" })
         }
-        if (!req.body.slug || typeof req.body.slug == undefined || req.body.slug == null) {
-            erros.push({ texto: "Slug Invalido" })
+        if (!req.body.slug || typeof req.body.slug == undefined || req.body.slug == null || !req.body.slug.match(/^[0-9a-z]+$/)) {
+            erros.push({ texto: "Slug vazio ou contendo carácter não alfanumérico" })
         }
         if (!req.body.descricao || typeof req.body.descricao == undefined || req.body.descricao == null) {
             erros.push({ texto: "Descrição Invalido" })
@@ -74,7 +74,7 @@ module.exports = {
         if (req.body.titulo.length < 3) {
             erros.push({ texto: "Título muito curto, favor digitar outro Título" })
         }
-        if (req.body.slug.length < 3) {
+        if (req.body.slug.length < 2) {
             erros.push({ texto: "Slug muito curto, favor digitar outro Slug" })
         }
         if (req.body.descricao.length < 3) {

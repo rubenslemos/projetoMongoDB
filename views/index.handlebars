@@ -1,0 +1,34 @@
+
+<div class="jumbotron">
+  <h1 class="display-4">Bem-Vindo, {{user.nome}} ao blog do Node</h1>
+  <p>Aqui poderá ver algumas novidades sobre computação</p>
+</div>
+  {{#if admin}}
+  <a class="btn btn-success btn-sm" href="/admin/postagens" role="button">Postagens</a>
+  <a class="btn btn-primary btn-sm" href="./admin/categorias" role="button">Categorias</a>
+  {{else}}
+  {{/if}}  
+  {{#if user}}
+  <a class="btn btn-danger btn-sm" href="/usuarios/logout" role="button">Fazer Logout</a>
+  {{else}}
+  <a class="btn btn-primary btn-sm" href="/usuarios/registro" role="button">Cadastre-se</a>
+  <a class="btn btn-primary btn-sm" href="/usuarios/login" role="button">Fazer Login</a>
+  {{/if}}
+<hr>
+<h2>Postagens recentes:</h2>
+{{#each postagens}}
+    <div class="card mt-4">
+        <div class="card-body">
+            <h4>Titulo: {{titulo}}</h4>
+            <small>Categoria: {{categoria.nome}}</small>
+            <br>
+            <small>{{formatDate data}}</small>
+            <hr>
+            <small>Descrição: {{descricao}}</small><br>
+            <a href="/postagem/{{slug}}"><button class="btn btn-success btn-sm mt-4">Leia Mais</button></a>
+        </div>
+    </div>
+{{else}}
+    <h4 class="mt-4">Nenhuma Postagem cadastrada</h4>
+    <P>Para registrar uma nova Postagem click em Nova Postagem</P>
+{{/each}}
