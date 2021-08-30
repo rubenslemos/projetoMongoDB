@@ -1,10 +1,8 @@
 const mongoose = require('mongoose')
 if (process.env.NODE_ENV == "production") {
-    mongoose.connect("mongodb+srv://rubenslemos:Rumos1982@blogdonode.kxnmn.mongodb.net/blogdonode", {
+    mongoose.connect("mongodb+srv://rubenslemos:Rumos1982@blogdonode.kxnmn.mongodb.net/blogdonode?retryWrites=true&w=majority", {
             useNewUrlParser: true,
             useUnifiedTopology: true,
-            // retryWrites = true,
-            // w = majority
         })
         .then(() => {
             console.log("MongoDB Conectado...")
