@@ -10,7 +10,7 @@ const Categorias = (req, res) => {
     if (!req.body.nome || typeof req.body.nome == undefined || req.body.nome == null) {
         erros.push({ texto: "Nome Invalido" })
     }
-    if (!req.body.slug || typeof req.body.slug == undefined || req.body.slug == null || !req.body.slug.match(/^[0-9a-z]+$/)) {
+    if (!req.body.slug || typeof req.body.slug == undefined || req.body.slug == null) {
         erros.push({ texto: "Slug vazio ou contendo carácter não alfanumérico" })
     }
     if (req.body.nome.length < 3) {
@@ -39,7 +39,7 @@ const Postagens = (req, res) => {
     if (!req.body.titulo || typeof req.body.titulo == undefined || req.body.titulo == null) {
         erros.push({ texto: "Titulo Invalido" })
     }
-    if (!req.body.slug || typeof req.body.slug == undefined || req.body.slug == null || !req.body.slug.match(/^[0-9a-z]+$/)) {
+    if (!req.body.slug || typeof req.body.slug == undefined || req.body.slug == null) {
         erros.push({ texto: "Slug vazio ou contendo carácter não alfanumérico" })
     }
     if (!req.body.descricao || typeof req.body.descricao == undefined || req.body.descricao == null) {
