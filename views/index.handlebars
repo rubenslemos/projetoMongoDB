@@ -16,6 +16,7 @@
   {{/if}}
 <hr>
 <h2>Postagens recentes:</h2>
+{{if user}}
 {{#each postagens}}
     <div class="card mt-4">
         <div class="card-body">
@@ -32,3 +33,5 @@
     <h4 class="mt-4">Nenhuma Postagem cadastrada</h4>
     <P>Para registrar uma nova Postagem click em Nova Postagem</P>
 {{/each}}
+{{else}}
+{{/if}}
