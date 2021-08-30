@@ -128,18 +128,18 @@ const Usuarios = async(req, res) => {
                         }
 
                         usuario.senha = hash
-                            // usuario.save()
+                        usuario.save().then(() => {
+                            req.flash("success_msg", "Usuario criado com sucesso!")
+
+                            res.redirect('/usuarios/login')
+                        }).catch((err) => {
+                            req.flash("error_msg", "Algo saiu errado, tente novamente!")
+                            res.redirect('/usuarios/registro')
+                        })
 
                     })
                 })
-                usuario.save().then(() => {
-                    req.flash("success_msg", "Usuario criado com sucesso!")
 
-                    res.redirect('/usuarios/login')
-                }).catch((err) => {
-                    req.flash("error_msg", "Algo saiu errado, tente novamente!")
-                    res.redirect('/usuarios/registro')
-                })
             }
 
         }).catch((err) => {
