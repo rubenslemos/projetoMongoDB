@@ -27,10 +27,10 @@ const Categorias = (req, res) => {
             slug: req.body.slug
         }).save().then(() => {
             req.flash("success_msg", "Categoria criada com sucesso!")
-            res.redirect('admin/categorias')
+            res.redirect('/admin/categorias')
         }).catch((err) => {
             req.flash("error_msg", "Algo saiu errado, tente novamente!")
-            res.redirect('admin/categorias')
+            res.redirect('/admin/categorias')
         })
     }
 }
@@ -64,7 +64,7 @@ const Postagens = (req, res) => {
         erros.push({ texto: "Categoria invalida, registre uma categoria primeiro" })
     }
     if (erros.length > 0) {
-        res.render("admin/addpostagem", { erros: erros })
+        res.render("/admin/addpostagem", { erros: erros })
     } else {
         new Postagem({
             titulo: req.body.titulo,
@@ -74,10 +74,10 @@ const Postagens = (req, res) => {
             categoria: req.body.categoria
         }).save().then(() => {
             req.flash("success_msg", "Postagem criada com sucesso!")
-            res.redirect('admin/postagens')
+            res.redirect('/admin/postagens')
         }).catch((err) => {
             req.flash("error_msg", "Algo saiu errado, tente novamente!")
-            res.redirect('admin/postagens')
+            res.redirect('/admin/postagens')
         })
     }
 
@@ -106,7 +106,7 @@ const Usuarios = async(req, res) => {
         erros.push({ texto: "Senha muito curta, favor digitar outra Senha" })
     }
     if (erros.length > 0) {
-        res.render("usuarios/registro", { erros: erros })
+        res.render("/usuarios/registro", { erros: erros })
     } else {
         await Usuario.findOne({ email: req.body.email }).then((Usuario) => {
             if (Usuario) {
